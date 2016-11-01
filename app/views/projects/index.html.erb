@@ -1,0 +1,7 @@
+<h1>All Projects</h1>
+<% @projects.each do |project| %>
+<%= link_to project.title, project_path(project) %>
+<hr>
+<% end %>
+
+<div id="paginator"><%= will_paginate @projects %></div>

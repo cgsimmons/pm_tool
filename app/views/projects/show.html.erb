@@ -1,0 +1,47 @@
+<h1><%= @project.title %></h1>
+<p>Due Date: <%= @project.due_date %>
+<p><%= @project.description %></p>
+<%= link_to 'edit', edit_project_path(@project) %>
+<%= link_to 'delete', project_path(@project),
+                      method: :delete,
+                      data: {confirm: 'Are you sure?'}%>
+
+<br>
+<h2>Add Task</h2>
+<%= @task.errors.full_messages.join(', ') %>
+<%= form_for [@project, @task] do |f| %>
+<div>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+</div>
+<div>
+  <%= f.label :body %>
+  <%= f.text_area :body %>
+</div>
+<div>
+  <%= f.label :due_date %>
+  <%= f.date_select :due_date, start_year: Date.today.year%>
+</div>
+<%= f.submit %>
+<% end %>
+
+<h2>Tasks</h2>
+<% @project.tasks.each do |task| %>
+  <div>
+    <h4 id="task_title"><%= task.title %></h4>
+    <br>
+    <p class="task_info">Status: - <%= task.done ? 'Finished' : 'Unfinished'%> -<br>
+      Due Date: <%= task.due_date %></p>
+    <p class="task_info"><%= task.body %></p>
+    <%= button_to 'Edit', edit_project_task_path(@project, task),
+                        method: :get%>
+    <%= button_to 'Delete', project_task_path(@project, task),
+                        method: :delete,
+                        data: {confirm: 'Are you sure?'}%>
+    <%= button_to "Mark As #{task.done ? 'Unfinished' : 'Finished'}",
+                          project_task_path(@project, task),
+                        method: :patch,
+                        params: {done: true}%>
+  </div>
+  <hr>
+<% end %>

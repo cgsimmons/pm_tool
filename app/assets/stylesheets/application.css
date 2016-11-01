@@ -13,3 +13,8 @@
  *= require_tree .
  *= require_self
  */
+
+#paginator {
+  display: table;
+  margin: 0 auto;
+}

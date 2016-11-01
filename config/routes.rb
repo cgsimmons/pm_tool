@@ -3,4 +3,7 @@ Rails.application.routes.draw do
   get '/' => 'home#index', as: :home
   get '/about' => 'home#about'
 
+  resources :projects do
+    resources :tasks
+  end
 end

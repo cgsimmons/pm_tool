@@ -1,0 +1,28 @@
+// Place all the styles related to the projects controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.field_with_errors {
+  display: inline-block;
+}
+
+.field_with_errors input, .field_with_errors textarea {
+  border-color: red;
+
+}
+
+.error {
+  color: red;
+}
+
+#task_title{
+  display:inline-block;
+  margin:0;
+}
+
+.task_info{
+  margin: 5px;
+}
+.button_to,
+.button_to div {
+  display: inline-block;
+}
