@@ -1,5 +1,5 @@
 <h1><%= @project.title %></h1>
-<p>Due Date: <%= @project.due_date %>
+<p>Due Date: <%= @project.due_date.strftime("%b. %e, %Y") %>
 <p><%= @project.description %></p>
 <%= link_to 'edit', edit_project_path(@project) %>
 <%= link_to 'delete', project_path(@project),
@@ -31,15 +31,15 @@
     <h4 id="task_title"><%= task.title %></h4>
     <br>
     <p class="task_info">Status: - <%= task.done ? 'Finished' : 'Unfinished'%> -<br>
-      Due Date: <%= task.due_date %></p>
+      Due Date: <%= task.due_date.strftime("%b. %e, %Y") %></p>
     <p class="task_info"><%= task.body %></p>
-    <%= button_to 'Edit', edit_project_task_path(@project, task),
+    <%= link_to 'Edit', edit_project_task_path(@project, task),
                         method: :get%>
-    <%= button_to 'Delete', project_task_path(@project, task),
+    <%= link_to 'Delete', project_task_path(@project, task),
                         method: :delete,
                         data: {confirm: 'Are you sure?'}%>
-    <%= button_to "Mark As #{task.done ? 'Unfinished' : 'Finished'}",
-                          project_task_path(@project, task),
+    <%= link_to "Mark As #{task.done ? 'Unfinished' : 'Finished'}",
+                          project_task_path(@project, task, task: {title: task.title, body: task.body, due_date: task.due_date, done: !task.done}),
                         method: :patch,
                         params: {done: true}%>
   </div>
