@@ -1,5 +1,6 @@
 class Project < ApplicationRecord
   has_many :tasks
+  has_many :discussions
   validates :title, presence: true, uniqueness: true
   validate :is_valid_due_date?
 
