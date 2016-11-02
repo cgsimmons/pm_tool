@@ -26,3 +26,13 @@
 .button_to div {
   display: inline-block;
 }
+
+.tasks_done{
+  float:right;
+  margin: 0 10% 0 10px;
+}
+
+.tasks_undone{
+  float:left;
+  margin: 0 10px 0 10%;
+}
