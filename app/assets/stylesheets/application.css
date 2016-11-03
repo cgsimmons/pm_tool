@@ -19,6 +19,10 @@
   margin: 0 auto;
 }
 
+ #sign-in {
+   float: right;
+ }
+
 h1 {
   line-height: normal;
 }
