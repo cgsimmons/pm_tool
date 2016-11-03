@@ -14,6 +14,9 @@
     <%= f.label :email %>
     <%= f.email_field :email %>
   </div>
+  <div>
+    <%= link_to "Change Password", edit_user_password_path(@user)%>
+  </div>
   <br>
 
   <%= f.submit %>

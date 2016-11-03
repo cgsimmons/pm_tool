@@ -20,7 +20,7 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
     task_params = params.require(:task).permit(:title, :body, :due_date, :done)
     if @task.update task_params
-      redirect_to project_path(@project)
+      redirect_to project_path(@project), notice: "Task Updated."
     else
       flash[:alert] = "Error saving task."
       render :edit

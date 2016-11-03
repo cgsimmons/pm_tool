@@ -13,46 +13,50 @@
 <div class="tasks_container">
   <div class="tasks_undone">
     <h3>Unfinished</h3>
-    <% @project.tasks.each do |task| %>
-      <% if !task.done %>
-      <div>
-        <h4 id="task_title"><%= task.title %></h4>
-        <br>
-        <p class="info">Due Date: <%= task.due_date.strftime("%b. %e, %Y") %></p>
-        <p class="info"><%= task.body %></p>
-        <%= link_to 'Edit', edit_project_task_path(@project, task),
-                            method: :get%>
-        <%= link_to 'Delete', project_task_path(@project, task),
-                            method: :delete,
-                            data: {confirm: 'Are you sure?'}%>
-        <%= link_to "Mark As Finished",
-                              project_task_path(@project, task,task: {title: task.title, body: task.body, due_date: task.due_date, done: true }),
-                            method: :patch%>
-        <hr>
-      </div>
-    <% end %>
+    <% if @project.unfinishedTasks != [] %>
+      <% @project.tasks.each do |task| %>
+        <div>
+          <h4 id="task_title"><%= task.title %></h4>
+          <br>
+          <p class="info">Due Date: <%= task.due_date.strftime("%b. %e, %Y") %></p>
+          <p class="info"><%= task.body %></p>
+          <%= link_to 'Edit', edit_project_task_path(@project, task),
+                              method: :get%>
+          <%= link_to 'Delete', project_task_path(@project, task),
+                              method: :delete,
+                              data: {confirm: 'Are you sure?'}%>
+          <%= link_to "Mark As Finished",
+                                project_task_path(@project, task,task: {title: task.title, body: task.body, due_date: task.due_date, done: true }),
+                              method: :patch%>
+          <hr>
+        </div>
+      <% end %>
+    <% else %>
+      <p>There are no unfinished tasks.</p>
     <% end %>
   </div>
   <div class="tasks_done">
     <h3>Finished</h3>
-    <% @project.tasks.each do |task| %>
-      <% if task.done %>
-      <div>
-        <h4 id="task_title"><%= task.title %></h4>
-        <br>
-        <p class="info">Due Date: <%= task.due_date.strftime("%b. %e, %Y") %></p>
-        <p class="info"><%= task.body %></p>
-        <%= link_to 'Edit', edit_project_task_path(@project, task),
-                            method: :get%>
-        <%= link_to 'Delete', project_task_path(@project, task),
-                            method: :delete,
-                            data: {confirm: 'Are you sure?'}%>
-        <%= link_to "Mark As Unfinished",
-                              project_task_path(@project, task,task: {title: task.title, body: task.body, due_date: task.due_date, done: false }),
-                            method: :patch%>
-        <hr>
-      </div>
+    <% if @project.finishedTasks != [] %>
+      <% @project.finishedTasks.each do |task| %>
+        <div>
+          <h4 id="task_title"><%= task.title %></h4>
+          <br>
+          <p class="info">Due Date: <%= task.due_date.strftime("%b. %e, %Y") %></p>
+          <p class="info"><%= task.body %></p>
+          <%= link_to 'Edit', edit_project_task_path(@project, task),
+                              method: :get%>
+          <%= link_to 'Delete', project_task_path(@project, task),
+                              method: :delete,
+                              data: {confirm: 'Are you sure?'}%>
+          <%= link_to "Mark As Unfinished",
+                                project_task_path(@project, task,task: {title: task.title, body: task.body, due_date: task.due_date, done: false }),
+                              method: :patch%>
+          <hr>
+        </div>
       <% end %>
+    <% else %>
+      <p>There are no finished Tasks.</p>
     <% end %>
   </div>
 </div>
@@ -74,7 +78,7 @@
 <br>
 <%= f.submit %>
 <% end %>
-
+<hr>
 <h2>Discussion</h2>
 <% if @project.discussions.count != 0 %>
   <table id="discussion_table">

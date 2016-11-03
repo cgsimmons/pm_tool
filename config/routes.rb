@@ -3,7 +3,11 @@ Rails.application.routes.draw do
   root 'home#index'
   get '/about' => 'home#about'
 
-  resources :users, only: [:create, :new, :edit, :update]
+
+  resources :users, only: [:create, :new, :edit, :update] do
+    resources :passwords, only: [:edit, :update]
+  end
+  resources :password_resets, only: [:new, :create, :edit, :update]
   resources :sessions, only: [:create, :new] do
     delete :destroy, on: :collection
   end
