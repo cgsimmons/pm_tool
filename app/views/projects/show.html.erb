@@ -14,7 +14,7 @@
   <div class="tasks_undone">
     <h3>Unfinished</h3>
     <% if @project.unfinishedTasks != [] %>
-      <% @project.tasks.each do |task| %>
+      <% @project.unfinishedTasks.each do |task| %>
         <div>
           <h4 id="task_title"><%= task.title %></h4>
           <br>
