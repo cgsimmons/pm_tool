@@ -1,6 +1,6 @@
 class Project < ApplicationRecord
-  has_many :tasks
-  has_many :discussions
+  has_many :tasks, dependent: :destroy
+  has_many :discussions, dependent: :destroy
   validates :title, presence: true, uniqueness: true
   validate :is_valid_due_date?
 

@@ -4,6 +4,10 @@ Rails.application.routes.draw do
   get '/about' => 'home#about'
 
   resources :projects do
-    resources :tasks
+    resources :tasks, except: [:index, :show]
+    resources :discussions, shallow: true do
+      resources :comments, except: [:index, :show]
+    end
+
   end
 end

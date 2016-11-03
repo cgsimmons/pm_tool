@@ -18,3 +18,11 @@
   display: table;
   margin: 0 auto;
 }
+
+h1 {
+  line-height: normal;
+}
+
+h2 {
+  padding-top: 20px;
+}

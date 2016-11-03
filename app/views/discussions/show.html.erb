@@ -1,0 +1,34 @@
+<%=link_to "< back to project", project_path(@project) %>
+<h1>Discussion for <%= @project.title %></h1>
+<h2><%= @discussion.title %></h2>
+<p><%= @discussion.description %></p>
+<%= link_to 'edit', edit_discussion_path(@discussion) %>
+<%= link_to 'delete', discussion_path(@discussion),
+                      method: :delete,
+                      data: {confirm: 'Are you sure?'}%>
+<h2>New Comment</h2>
+<%= @comment.errors.full_messages.join(', ') %>
+<%= form_for [@discussion, @comment] do |f| %>
+<div>
+  <%= f.text_area :body %>
+</div>
+<br>
+<%= f.submit %>
+<% end %>
+
+<h2>Comments</h2>
+<% if @discussion.comments.count != 0 %>
+  <% for comment in @discussion.comments %>
+    <div>
+      <p><%= comment.body %></p>
+      <%= link_to 'Edit', edit_comment_path(comment),
+                          method: :get%>
+      <%= link_to 'Delete', comment_path(comment),
+                          method: :delete,
+                          data: {confirm: 'Are you sure?'}%>
+    </div>
+    <hr>
+  <% end %>
+<% else %>
+  <p>No comments available for this discussion</p>
+<% end %>

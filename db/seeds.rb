@@ -7,14 +7,25 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 50.times do
   date = Faker::Date.between(Date.today, 5.years.from_now)
-  p = Project.create(title: Faker::Hipster.words(4).join(" "),
+  p = Project.create(title: Faker::Hipster.sentence,
               description: Faker::StarWars.quote,
               due_date: date)
-  rand(5).times do
-    Task.create(project: p,
-                    title: Faker::Hacker.verb + ' ' +Faker::Hacker.adjective +  ' ' + Faker::Hacker.noun,
+  (2 + rand(5)).times do
+    Task.create(    project: p,
+                    title: Faker::Hacker.verb + " " + Faker::Hacker.adjective +  " " + Faker::Hacker.noun,
+                    body: Faker::ChuckNorris.fact,
+                    done: [true, false].sample,
                     due_date: Faker::Date.between(Date.today, date))
   end
+  rand(3).times do
+    Discussion.create(  project: p,
+                        title: Faker::Commerce.product_name,
+                        description: Faker::Lorem.paragraph
+                      )
+    rand(5).times do
+      Comment.create( discussion: Discussion.last,
+                      body: Faker::Hacker.say_something_smart)
+    end
+  end
 end
-puts "Made the Projects"
- # TODO:  NOT SEEDING TASKS!
+puts "Seeded projects, tasks, discussion, and comments."

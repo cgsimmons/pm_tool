@@ -1,4 +1,5 @@
 class ProjectsController < ApplicationController
+
   def index
     @projects = Project.paginate(:page => params[:page], :per_page => 10)
   end
@@ -6,6 +7,7 @@ class ProjectsController < ApplicationController
   def show
     @project = Project.find(params[:id])
     @task = Task.new
+    @discussion = Discussion.new
   end
 
   def new
@@ -39,7 +41,7 @@ class ProjectsController < ApplicationController
   def destroy
     @project = Project.find(params[:id])
     @project.destroy
-    redirect_to projects_path
+    redirect_to projects_path, notice: "Project deleted."
   end
 
 end

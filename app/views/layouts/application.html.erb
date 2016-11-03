@@ -8,7 +8,7 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body class="<%= controller_name %> <%= action_name %>">
     <%= link_to 'Home', home_path %>
     |
     <%= link_to 'About', about_path %>
@@ -17,6 +17,9 @@
     |
     <%= link_to 'All Projects', projects_path %>
     <hr>
+    <% if notice || alert %>
+      <%= notice || alert %><br>
+    <% end %>
     <%= yield %>
   </body>
 </html>

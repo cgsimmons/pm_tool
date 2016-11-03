@@ -9,7 +9,9 @@ class TasksController < ApplicationController
     if @task.save
       redirect_to project_path(@project), notice: "Task added successfully."
     else
-      render 'project/show'
+      @discussion = Discussion.new
+      flash[:alert] = "Error creating task."
+      render 'projects/show'
     end
   end
 
@@ -20,6 +22,7 @@ class TasksController < ApplicationController
     if @task.update task_params
       redirect_to project_path(@project)
     else
+      flash[:alert] = "Error saving task."
       render :edit
     end
   end
