@@ -5,11 +5,21 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+password = 'password'
+25.times do
+  User.create(first_name: Faker::Name.first_name,
+              last_name: Faker::Name.last_name,
+              email: Faker::Internet.email,
+              password_digest: User.new(:password => password).password_digest)
+end
+puts 'Seeded users.'
+
 50.times do
   date = Faker::Date.between(Date.today, 5.years.from_now)
   p = Project.create(title: Faker::Hipster.sentence,
               description: Faker::StarWars.quote,
-              due_date: date)
+              due_date: date,
+              user: User.all.sample)
   (2 + rand(5)).times do
     Task.create(    project: p,
                     title: Faker::Hacker.verb + " " + Faker::Hacker.adjective +  " " + Faker::Hacker.noun,

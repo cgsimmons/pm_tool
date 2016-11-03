@@ -1,5 +1,6 @@
-<h1><%= @project.title %></h1>
-<p>Due Date: <%= @project.due_date.strftime("%b. %e, %Y") %>
+<h1 class="project-title"><%= @project.title %></h1>
+<p class="project-details">created by <%= @project.user.full_name %>
+  <br>Due Date: <%= @project.due_date.strftime("%b. %e, %Y") %></p>
 <p><%= @project.description %></p>
 <%= link_to 'edit', edit_project_path(@project) %>
 <%= link_to 'delete', project_path(@project),
