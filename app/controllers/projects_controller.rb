@@ -9,6 +9,7 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
     @task = Task.new
     @discussion = Discussion.new
+    @favorite = @project.favorite_for(current_user)
   end
 
   def new

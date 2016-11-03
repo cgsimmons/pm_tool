@@ -2,6 +2,8 @@ class User < ApplicationRecord
   attr_accessor :reset_token
   has_secure_password
   has_many :products, dependent: :destroy
+  has_many :favorites, dependent: :destroy
+  has_many :favorite_projects, through: :favorites, source: :project
   before_validation :downcase_email
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i

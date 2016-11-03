@@ -2,6 +2,15 @@
 <p class="project-details">created by <%= @project.user.full_name %>
   <br>Due Date: <%= @project.due_date.strftime("%b. %e, %Y") %></p>
 <p><%= @project.description %></p>
+<% if user_signed_in? %>
+  <% if can? :favorite, @project %>
+    <% if @favorite.present? %>
+      <%= link_to 'unfavorite', favorite_path(@favorite), method: :delete %>
+    <% else %>
+      <%= link_to 'favorite', project_favorites_path(@project, @favorite), method: :post%>
+    <% end %>
+  <% end %>
+<% end %>
 <%= link_to 'edit', edit_project_path(@project) %>
 <%= link_to 'delete', project_path(@project),
                       method: :delete,
@@ -20,13 +29,13 @@
           <br>
           <p class="info">Due Date: <%= task.due_date.strftime("%b. %e, %Y") %></p>
           <p class="info"><%= task.body %></p>
-          <%= link_to 'Edit', edit_project_task_path(@project, task),
+          <%= link_to 'Edit', edit_task_path(task),
                               method: :get%>
-          <%= link_to 'Delete', project_task_path(@project, task),
+          <%= link_to 'Delete', task_path(task),
                               method: :delete,
                               data: {confirm: 'Are you sure?'}%>
           <%= link_to "Mark As Finished",
-                                project_task_path(@project, task,task: {title: task.title, body: task.body, due_date: task.due_date, done: true }),
+                                task_path(task,task: {title: task.title, body: task.body, due_date: task.due_date, done: true, project: @project}),
                               method: :patch%>
           <hr>
         </div>
@@ -44,13 +53,13 @@
           <br>
           <p class="info">Due Date: <%= task.due_date.strftime("%b. %e, %Y") %></p>
           <p class="info"><%= task.body %></p>
-          <%= link_to 'Edit', edit_project_task_path(@project, task),
+          <%= link_to 'Edit', edit_task_path(task),
                               method: :get%>
-          <%= link_to 'Delete', project_task_path(@project, task),
+          <%= link_to 'Delete', task_path(task),
                               method: :delete,
                               data: {confirm: 'Are you sure?'}%>
           <%= link_to "Mark As Unfinished",
-                                project_task_path(@project, task,task: {title: task.title, body: task.body, due_date: task.due_date, done: false }),
+                                task_path(task,task: {title: task.title, body: task.body, due_date: task.due_date, done: false, project: @project }),
                               method: :patch%>
           <hr>
         </div>

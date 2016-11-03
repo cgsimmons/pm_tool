@@ -16,8 +16,8 @@ class TasksController < ApplicationController
   end
 
   def update
-    @project = Project.find(params[:project_id])
     @task = Task.find(params[:id])
+    @project = @task.project
     task_params = params.require(:task).permit(:title, :body, :due_date, :done)
     if @task.update task_params
       redirect_to project_path(@project), notice: "Task Updated."
@@ -28,13 +28,13 @@ class TasksController < ApplicationController
   end
 
   def edit
-    @project = Project.find(params[:project_id])
     @task = Task.find(params[:id])
+    @project = @task.project
   end
 
   def destroy
-    @project = Project.find(params[:project_id])
     @task = Task.find(params[:id])
+    @project = @task.project
     @task.destroy
     redirect_to project_path(@project), notice: 'Task deleted successfully.'
   end

@@ -1,6 +1,8 @@
 class Project < ApplicationRecord
   has_many :tasks, dependent: :destroy
   has_many :discussions, dependent: :destroy
+  has_many :favorites, dependent: :destroy
+  has_many :favoriting_users, through: :favorites, source: :user
   belongs_to :user
 
   validates :user_id, presence: true
@@ -13,6 +15,10 @@ class Project < ApplicationRecord
 
   def finishedTasks
     tasks.where("done = true")
+  end
+
+  def favorite_for(user)
+    favorites.find_by(user: user)
   end
 
   private

@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root 'home#index'
   get '/about' => 'home#about'
 
-
+  resources :favorites, only: :index
   resources :users, only: [:create, :new, :edit, :update] do
     resources :passwords, only: [:edit, :update]
   end
@@ -11,8 +11,9 @@ Rails.application.routes.draw do
   resources :sessions, only: [:create, :new] do
     delete :destroy, on: :collection
   end
-  resources :projects do
+  resources :projects, shallow: true do
     resources :tasks, except: [:index, :show]
+    resources :favorites, only: [:create, :destroy]
     resources :discussions, shallow: true do
       resources :comments, except: [:index, :show]
     end
