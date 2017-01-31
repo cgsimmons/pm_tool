@@ -1,24 +1,17 @@
-# README
+## PROJECT MANAGEMENT TOOL
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A project management web app built on rails. Projects have finished/unfinished tasks as well as discussions with comments.
 
-Things you may want to cover:
+## Installation
 
-* Ruby version
+```bash
+rails install
+rails db:setup
+rails s
+```
+**Note:** If you don't want to use faker to seed the app, replace 'rails db:setup' with the commands below:
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```bash
+rails db:create
+rails db:migrate
+```
