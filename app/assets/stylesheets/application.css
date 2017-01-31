@@ -14,7 +14,7 @@
  *= require_self
  */
 
-#paginator {
+.paginator {
   display: table;
   margin: 0 auto;
 }

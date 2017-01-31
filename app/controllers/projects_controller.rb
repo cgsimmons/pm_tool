@@ -2,7 +2,7 @@ class ProjectsController < ApplicationController
   before_action :authenticate_user, except: [:index, :show]
 
   def index
-    @projects = Project.paginate(:page => params[:page], :per_page => 10)
+    @projects = Project.order(created_at: :DESC).page(params[:page]).per(10)
   end
 
   def show
